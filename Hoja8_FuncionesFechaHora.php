@@ -7,6 +7,7 @@
     <title>Hoja 8 Funciones Fecha y Hora</title>
     <?php
     // Establecer la zona horaria
+    setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'es_ES.UTF-8');
     date_default_timezone_set('Europe/Madrid');
 
     // Obtener el día de la semana actual (0 = domingo, 1 = lunes, ..., 6 = sábado)
@@ -51,6 +52,7 @@
         $timestamp = time();
 
         // Formatos de fecha y hora
+        setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'es_ES.UTF-8');
         echo strftime('%A') . "<br>"; // Día en español
         echo strftime('%A %d de %B de %Y %I:%M:%S %p', $timestamp) . "<br>";
         echo strftime('%A, %d de %B de %Y %I:%M:%S %p', $timestamp) . "<br>";
@@ -65,28 +67,37 @@
         ?>
     </div>
     <div>
-        <h3>2. Realiza fechas.php en la que se muestre la fecha actual y la fecha dentro de una semana en el formato 2024-10-11. Muestra lo mismo pero en el formato:</h3>
-        <p>"viernes, 11 de octubre de 2024. A las 18:35" (si es posible en español)</p>
+        <h3>2. Realiza fechas.php en la que se muestre la fecha actual y la fecha dentro de una semana en el formato 2024-10-11. Muestra lo mismo pero en el formato:"viernes, 11 de octubre de 2024. A las 18:35" (si es posible en español)</h3>
         <br>
         <?php
+        // Establecer la zona horaria
+        date_default_timezone_set('Europe/Madrid');
+
         // Obtener la fecha actual
         $fecha_actual = date('Y-m-d');
 
         // Calcular la fecha dentro de una semana
         $fecha_futura = date('Y-m-d', strtotime('+1 week'));
 
+        // Mostrar fechas en formato "2024-10-11"
+        echo "Fecha actual: " . $fecha_actual . "<br>";
+        echo "Fecha dentro de una semana: " . $fecha_futura . "<br><br>";
+
         // Mostrar fechas en formato "viernes, 11 de octubre de 2024. A las 18:35"
+        setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'es_ES.UTF-8');
         $fecha_actual_formato_es = strftime("%A, %d de %B de %Y. A las %H:%M", time());
         $fecha_futura_formato_es = strftime("%A, %d de %B de %Y. A las %H:%M", strtotime('+1 week'));
 
         echo "Fecha actual en español: " . ucfirst($fecha_actual_formato_es) . "<br>";
         echo "Fecha dentro de una semana en español: " . ucfirst($fecha_futura_formato_es) . "<br>";
         ?>
+
     </div>
     <div>
         <h3>3. Realiza checkdate.php que se compruebe si el año 2023 fue bisiesto y si lo fue el año 2022.</h3>
         <br>
         <?php
+        setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'es_ES.UTF-8');
         // Función para comprobar si un año es bisiesto
         function es_bisiesto($year)
         {
@@ -110,6 +121,7 @@
         <h3>4. Realiza diassemana.php que escriba “Hoy es Viernes”</h3>
         <br>
         <?php
+        setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'es_ES.UTF-8');
         // Obtener el día de la semana actual en español
         $dia_semana = strftime("%A");
         echo "Hoy es " . ucfirst($dia_semana) . ".";
@@ -125,6 +137,7 @@
         <h3>6. Escribe una página php que guarde en una variable la fecha '1978-12-01 13:45:00' y muestre que día de la semana fue.</h3>
         <br>
         <?php
+        setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'es_ES.UTF-8');
         $fecha_especifica = '1978-12-01 13:45:00';
         $día_de_la_semana = strftime('%A', strtotime($fecha_especifica)); // Obtiene el día de la semana
         echo "La fecha $fecha_especifica fue un $día_de_la_semana.<br>";
@@ -134,6 +147,7 @@
         <h3>7. Escribe una página php que cuente cuántos días faltan para el 01 de noviembre de 2024</h3>
         <br>
         <?php
+        setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'es_ES.UTF-8');
         $fecha_inicio = strtotime('2024-10-01');
         $fecha_fin = strtotime('2024-11-01');
         $hoy = time();
