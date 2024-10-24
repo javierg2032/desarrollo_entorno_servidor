@@ -1,35 +1,31 @@
 <?php
-session_start(); //Crear una sesión 
-$err1 = false;
-$err2 = false;
-$err3 = false;
-//Si va bien redirige a principal.php si va mal, mensaje de error 
+session_start(); // Crear una sesión 
+$errores = ""; // Variable para concatenar los errores
+
+// Si va bien redirige a principal.php si va mal, mensaje de error 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    //Se debe hacer un analisis de todos los campos que estan dentro del formulario
+    // Se debe hacer un análisis de todos los campos que están dentro del formulario
     if (empty($_POST['buscar'])) {
-        $err1 = true;
+        $errores .= "<p>El texto a buscar está vacío</p>";
     }
     if (empty($_POST['busqueda'])) {
-        $err2 = true;
+        $errores .= "<p>La sección de búsqueda está vacía</p>";
     }
     if (empty($_POST['genero'])) {
-        $err3 = true;
+        $errores .= "<p>No has seleccionado ningún género musical</p>";
     }
-    if (!$err1 && !$err2 && !$err3) {
 
-        //Obtener los valores del formulario
+    // Si no hay errores, procesar el formulario
+    if (empty($errores)) {
+        // Obtener los valores del formulario
         $_SESSION['buscar'] = $_POST['buscar'];
         $_SESSION['busqueda'] = $_POST['busqueda'];
         $_SESSION['genero'] = $_POST['genero'];
 
-        //$buscar = $_POST['buscar'];
-        //$busqueda = $_POST['busqueda'];
-        //$genero = $_POST['genero'];
-
-        header("Location: Resultado.php?valor1=$buscar&valor2=$busqueda&valor3=$genero");
+        header("Location: Resultado.php?valor1={$_SESSION['buscar']}&valor2={$_SESSION['busqueda']}&valor3={$_SESSION['genero']}");
+        exit(); // Es importante usar exit después de redirigir
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,14 +37,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <?php
-    if ($err1) {
-        echo "<p>El texto a buscar está vacío</p>";
-    }
-    if ($err2) {
-        echo "<p>La sección de busqueda está vacía</p>";
-    }
-    if ($err3) {
-        echo "<p>No has seleccionado ningún género musical</p>";
+    // Mostrar los errores concatenados, si los hay
+    if (!empty($errores)) {
+        echo $errores;
     }
     ?>
 
