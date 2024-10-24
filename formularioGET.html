@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora</title>
+  </head>
+  <body>
+    <h1>Calculadora</h1>
+    <form action="destino.php" method="GET">
+      <!-- Primer número -->
+      <label for="variable1">Primer número:</label>
+      <input type="number" id="variable1" name="variable1" required />
+      <br /><br />
+
+      <!-- Segundo número -->
+      <label for="variable2">Segundo número:</label>
+      <input type="number" id="variable2" name="variable2" required />
+      <br /><br />
+
+      <!-- Selección de la operación -->
+      <label for="variable3">Operación:</label>
+      <select id="variable3" name="variable3">
+        <option value="+">Suma</option>
+        <option value="-">Resta</option>
+        <option value="*">Multiplicación</option>
+        <option value="/">División</option>
+      </select>
+      <br /><br />
+
+      <!-- Botón para enviar el formulario -->
+      <input type="submit" value="Calcular" />
+      <br /><br />
+
+      <label for="myfile">Selecciona un archivo:</label>
+      <input type="file" id="myfile" name="myfile" />
+    </form>
+  </body>
+</html>
