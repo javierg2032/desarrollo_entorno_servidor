@@ -22,6 +22,6 @@ echo"<p><strong>Genero musical: </strong> $genero</p>";
         <meta charset="UTF-8">
     </head>
     <body>
-        <a href="Ejercicio1.php">Volver</a>
+        <a href="Ejercicio1v2ConStyle.php">Volver</a>
     </body>
 </html>

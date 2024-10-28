@@ -6,22 +6,28 @@ $busqueda_class = "";
 $genero_class = "";
 $radio_class = ""; // Clase para los radio buttons
 
-$buscar = isset($_POST['buscar']) ? $_POST['buscar'] : ""; // Mantener el valor de buscar
-$busqueda = isset($_POST['busqueda']) ? $_POST['busqueda'] : ""; // Mantener el valor del radio
-$genero = isset($_POST['genero']) ? $_POST['genero'] : ""; // Mantener el valor del select
+// Inicializar las variables
+$buscar = "";
+$busqueda = "";
+$genero = "";
 
 // Si va bien redirige a principal.php si va mal, mensaje de error 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Obtener los valores del formulario
+    $buscar = isset($_POST['buscar']) ? $_POST['buscar'] : ""; // Mantener el valor de buscar
+    $busqueda = isset($_POST['busqueda']) ? $_POST['busqueda'] : ""; // Mantener el valor del radio
+    $genero = isset($_POST['genero']) ? $_POST['genero'] : ""; // Mantener el valor del select
+
     // Validar campos y añadir clases CSS para campos vacíos
-    if (empty($_POST['buscar'])) {
+    if (empty($buscar)) {
         $errores .= "<p>El texto a buscar está vacío</p>";
         $buscar_class = "error-input"; // Añadir clase de error
     }
-    if (empty($_POST['busqueda'])) {
+    if (empty($busqueda)) {
         $errores .= "<p>La sección de búsqueda está vacía</p>";
         $radio_class = "error-input-radio"; // Añadir clase de error a los radios
     }
-    if (empty($_POST['genero']) || $_POST['genero'] == " ") {
+    if (empty($genero) || trim($genero) == "") {
         $errores .= "<p>No has seleccionado ningún género musical</p>";
         $genero_class = "error-input"; // Añadir clase de error
     }
@@ -29,9 +35,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Si no hay errores, procesar el formulario
     if (empty($errores)) {
         // Obtener los valores del formulario
-        $_SESSION['buscar'] = $_POST['buscar'];
-        $_SESSION['busqueda'] = $_POST['busqueda'];
-        $_SESSION['genero'] = $_POST['genero'];
+        $_SESSION['buscar'] = $buscar;
+        $_SESSION['busqueda'] = $busqueda;
+        $_SESSION['genero'] = $genero;
 
         header("Location: Resultado.php?valor1={$_SESSION['buscar']}&valor2={$_SESSION['busqueda']}&valor3={$_SESSION['genero']}");
         exit(); // Es importante usar exit después de redirigir
@@ -52,10 +58,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         .error-input {
             border: 2px solid red;
-            background-color: #ffe6e6;
-        }
-
-        select.error-input {
             background-color: #ffe6e6;
         }
 
@@ -82,9 +84,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <n>Búsqueda de canciones</n>
             </i></p>
         <div>
-            Texto a buscar:
-            <input type="text" name='buscar' value="<?php echo htmlspecialchars($buscar); ?>" class="<?php echo $buscar_class; ?>">
-
+            <div class="<?php echo $buscar_class; ?>">
+                Texto a buscar:
+                <input type="text" name='buscar' value="<?php echo htmlspecialchars($buscar); ?>">
+            </div>
             <br><br>
 
             <div class="<?php echo $radio_class; ?>"> <!-- Contenedor para los radio buttons -->
