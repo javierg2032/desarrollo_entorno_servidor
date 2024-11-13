@@ -10,28 +10,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $contrasena = $_POST['contrasena'];
 
     if (!empty($usuario) && !empty($contrasena)) {
-        // Conectar a la base de datos usando PDO con try-catch
-        try {
-            $mbd = new PDO('mysql:host=localhost;dbname=prueba1', 'prueba1', 'prueba1');
-            // Establecer el modo de error de PDO
-            $mbd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            // Si hay un error en la conexión, muestra el mensaje y termina el script
-            print "¡Error!: " . $e->getMessage() . "<br/>";
-            die();
+        // Conectar a la base de datos usando mysqli
+        $conexion = new mysqli('localhost', 'prueba1', 'prueba1', 'prueba1');
+
+        // Verificar la conexión
+        if ($conexion->connect_error) {
+            die("¡Error en la conexión!: " . $conexion->connect_error);
         }
 
         // Preparar la consulta para evitar inyecciones SQL
-        $sql = "SELECT * FROM usuario WHERE nombreUsuario = :usuario AND contrasena = :contrasena";
-        $stmt = $mbd->prepare($sql);
-        $stmt->bindParam(':usuario', $usuario);
-        $stmt->bindParam(':contrasena', $contrasena);
+        $sql = "SELECT * FROM usuario WHERE nombreUsuario = ? AND contrasena = ?";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bind_param("ss", $usuario, $contrasena);
 
         // Ejecutar la consulta
         $stmt->execute();
 
+        // Obtener el resultado
+        $resultado = $stmt->get_result();
+
         // Verificar si la consulta devuelve algún resultado
-        if ($stmt->rowCount() > 0) {
+        if ($resultado->num_rows > 0) {
             // Si existe un usuario con esas credenciales
             $_SESSION['usuario'] = $usuario; // Guardar el usuario en la sesión
             header("Location: bienvenido.php"); // Redirigir a la página de bienvenida
@@ -41,7 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Cerrar la conexión
-        $mbd = null;
+        $stmt->close();
+        $conexion->close();
     } else {
         $vacio = true;
     }
