@@ -1,0 +1,24 @@
+<empleados>
+    <empleado>
+        <nombre>LUIS MIGUEL</nombre>
+        <apellidos>GALLARDO LEON</apellidos>
+        <nif>5674179P</nif>
+        <empresa>DATATONIC, S.A.</empresa>
+        <direccion>HERMANOS ARAGON , CALLE</direccion>
+        <cp>11690</cp>
+        <localidad>OLVERA</localidad>
+        <tlf_fijo>95630316</tlf_fijo>
+        <tlf_movil>69619915</tlf_movil>
+    </empleado>
+    <empleado>
+        <nombre>MIGUEL</nombre>
+        <apellidos>BERENGUEL MARQUINA</apellidos>
+        <nif>6182669F</nif>
+        <empresa>MAGARIIT SERVICES, S.A.</empresa>
+        <direccion>ALCALA LA REAL , CALLE</direccion>
+        <cp>11640</cp>
+        <localidad>BORNOS</localidad>
+        <tlf_fijo>96304400</tlf_fijo>
+        <tlf_movil>62676864</tlf_movil>
+    </empleado>
+</empleados>
