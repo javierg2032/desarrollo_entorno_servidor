@@ -2,7 +2,6 @@
 	/*comprueba que el usuario haya abierto sesión o redirige*/
 	require 'sesiones.php';
 	require_once 'bd_tienda.php';
-	require 'funcionCategorias.php';
 	comprobar_sesion();
 ?>
 <!DOCTYPE html>
